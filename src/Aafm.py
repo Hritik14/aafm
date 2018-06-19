@@ -104,11 +104,12 @@ class Aafm:
 			pattern = re.compile(r"^(?P<permissions>[dl\-][rwx\-]+)\s+(?P<hardlinks>\d+)\s+(?P<owner>[\w_]+)\s+(?P<group>[\w_]+)\s+(?P<size>\d+)\s+(?P<datetime>\w{3} \w{3}\s+\d+\s+\d{2}:\d{2}:\d{2} \d{4}) (?P<name>.+)$")
 		else:
 			command = ['ls', '-l', '-a', device_dir]
-			pattern = re.compile(r"^(?P<permissions>[dl\-][rwx\-]+) (?P<owner>\w+)\W+(?P<group>[\w_]+)\W*(?P<size>\d+)?\W+(?P<datetime>\d{4}-\d{2}-\d{2} \d{2}:\d{2}) (?P<name>.+)$")
+			pattern = re.compile(r"^(?P<permissions>[dl\-][rwx\-]+)\W+(?P<inodes>\d*) (?P<owner>\w+)\W+(?P<group>[\w_]+)\W*(?P<size>\d+)?\W+(?P<datetime>\d{4}-\d{2}-\d{2} \d{2}:\d{2}) (?P<name>.+)$")
 
 		entries = {}
 
 		for line in self.adb_shell(*command):
+			print("LINE ==== "+line)
 			line = line.rstrip()
 			match = pattern.match(line)
 			
