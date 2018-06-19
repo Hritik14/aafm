@@ -109,7 +109,6 @@ class Aafm:
 		entries = {}
 
 		for line in self.adb_shell(*command):
-			print("LINE ==== "+line)
 			line = line.rstrip()
 			match = pattern.match(line)
 			
